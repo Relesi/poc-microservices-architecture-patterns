@@ -2,12 +2,12 @@ package com.relesi.architecture.services;
 
 import java.util.Optional;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.relesi.architecture.domain.Category;
 import com.relesi.architecture.repositories.CategoryRepository;
+import com.relesi.architecture.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -17,12 +17,13 @@ public class CategoriaService {
 
 	public Category search(Integer id) {
 		Optional<Category> obj = categoryRepository.findById(id);
+		
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Object not found!  Id: " + id + ", Tipo: " + Category.class.getName(), null));
+				"Object not found!  Id: " + id + ", Tipo: " + Category.class.getName()));
 
 	}
 	
-	
+
 
 
 
