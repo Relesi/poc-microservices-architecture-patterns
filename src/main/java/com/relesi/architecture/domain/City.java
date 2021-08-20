@@ -11,12 +11,11 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class City implements Serializable {
-	
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String name;
@@ -28,8 +27,6 @@ public class City implements Serializable {
 	public City() {
 
 	}
-	
-	
 
 	public City(Integer id, String name, State state) {
 		super();
@@ -37,8 +34,6 @@ public class City implements Serializable {
 		this.name = name;
 		this.state = state;
 	}
-
-
 
 	public Integer getId() {
 		return id;
