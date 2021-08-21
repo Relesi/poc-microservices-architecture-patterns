@@ -10,6 +10,7 @@ public enum ClientType {
 	private ClientType(int cod, String description) {
 		this.cod = cod;
 		this.description = description;
+		
 	}
 
 	public int getCod() {
@@ -18,6 +19,23 @@ public enum ClientType {
 
 	public String getDescription() {
 		return description;
+	}
+	
+
+	public static ClientType toEnum(Integer id) {
+		
+		if (id == null) {
+			return null;
+		}
+		
+		for (ClientType x : ClientType.values()) {
+			
+			if (id.equals(x.getCod())) {
+				return x;
+			}
+
+		}
+		throw new IllegalArgumentException("Invalid id " + id);
 	}
 
 }
