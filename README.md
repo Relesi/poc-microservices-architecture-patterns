@@ -56,6 +56,6 @@ spring-boot-jwt/
 
 
 
-
+Following the java nomenclature
 
 Development...
