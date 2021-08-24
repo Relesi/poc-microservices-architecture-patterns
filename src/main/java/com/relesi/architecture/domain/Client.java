@@ -6,28 +6,44 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import com.relesi.architecture.domain.enums.ClientType;
 
+@Entity
 public class Client implements Serializable {
 	
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String email;
-	private Double itinOrEin;
+	private String itinOrEin;
 	private Integer type;
 
+	
+	@OneToMany(mappedBy = "client")
 	private List<Address> addresses = new ArrayList<>();
 
-	private Set<String> phones = new HashSet<>();
+	
+	@ElementCollection
+	@CollectionTable(name = "TELEPHONE")
+	private Set<String> telephones = new HashSet<>();
 
 	public Client() {
 
 	}
 
-	public Client(Integer id, String name, String email, Double itinOrEin, ClientType type) {
+	public Client(Integer id, String name, String email, String itinOrEin, ClientType type) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -60,11 +76,11 @@ public class Client implements Serializable {
 		this.email = email;
 	}
 
-	public Double getItinOrEin() {
+	public String getItinOrEin() {
 		return itinOrEin;
 	}
 
-	public void setItinOrEin(Double itinOrEin) {
+	public void setItinOrEin(String itinOrEin) {
 		this.itinOrEin = itinOrEin;
 	}
 
@@ -84,12 +100,12 @@ public class Client implements Serializable {
 		this.addresses = addresses;
 	}
 
-	public Set<String> getPhones() {
-		return phones;
+	public Set<String> getTelephones() {
+		return telephones;
 	}
 
-	public void setPhones(Set<String> phones) {
-		this.phones = phones;
+	public void setTelephones(Set<String> telephones) {
+		this.telephones = telephones;
 	}
 
 	@Override
