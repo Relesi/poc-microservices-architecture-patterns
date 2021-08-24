@@ -7,6 +7,8 @@ public class Address {
 	private String number;
 	private String complement;
 	private String district;
-	private string zipCode;
+	private String zipCode;
+	
+	private Client client;
 
 }
