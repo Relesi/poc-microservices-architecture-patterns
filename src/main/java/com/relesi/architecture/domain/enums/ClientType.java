@@ -2,7 +2,8 @@ package com.relesi.architecture.domain.enums;
 
 public enum ClientType {
 
-	NATURALPERSON(1, "Natural Person"), LEGALPERSON(2, "Legal Person");
+	NATURALPERSON(1, "Natural Person"), 
+	LEGALPERSON(2, "Legal Person");
 
 	private int cod;
 	private String description;
@@ -21,7 +22,6 @@ public enum ClientType {
 		return description;
 	}
 	
-
 	public static ClientType toEnum(Integer id) {
 		
 		if (id == null) {
@@ -35,7 +35,7 @@ public enum ClientType {
 			}
 
 		}
-		throw new IllegalArgumentException("Invalid id " + id);
+		throw new IllegalArgumentException("Invalid id:  " + id);
 	}
 
 }
