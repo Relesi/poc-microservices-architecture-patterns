@@ -1,18 +1,38 @@
 package com.relesi.architecture.domain;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
 	
+	
+	private static final long serialVersionUID = 1L;
+
 	private Integer id;
 	private String publicArea;
 	private String number;
 	private String complement;
 	private String district;
 	private String zipCode;
-	
+
 	private Client client;
-	
+
+	private City city;
+
 	public Address() {
-		
+
+	}
+
+	public Address(Integer id, String publicArea, String number, String complement, String district, String zipCode,
+			Client client, City city) {
+		super();
+		this.id = id;
+		this.publicArea = publicArea;
+		this.number = number;
+		this.complement = complement;
+		this.district = district;
+		this.zipCode = zipCode;
+		this.client = client;
+		this.setCity(city);
 	}
 
 	public Integer getId() {
@@ -71,17 +91,19 @@ public class Address {
 		this.client = client;
 	}
 
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((client == null) ? 0 : client.hashCode());
-		result = prime * result + ((complement == null) ? 0 : complement.hashCode());
-		result = prime * result + ((district == null) ? 0 : district.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((number == null) ? 0 : number.hashCode());
-		result = prime * result + ((publicArea == null) ? 0 : publicArea.hashCode());
-		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
 
@@ -94,45 +116,12 @@ public class Address {
 		if (getClass() != obj.getClass())
 			return false;
 		Address other = (Address) obj;
-		if (client == null) {
-			if (other.client != null)
-				return false;
-		} else if (!client.equals(other.client))
-			return false;
-		if (complement == null) {
-			if (other.complement != null)
-				return false;
-		} else if (!complement.equals(other.complement))
-			return false;
-		if (district == null) {
-			if (other.district != null)
-				return false;
-		} else if (!district.equals(other.district))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (number == null) {
-			if (other.number != null)
-				return false;
-		} else if (!number.equals(other.number))
-			return false;
-		if (publicArea == null) {
-			if (other.publicArea != null)
-				return false;
-		} else if (!publicArea.equals(other.publicArea))
-			return false;
-		if (zipCode == null) {
-			if (other.zipCode != null)
-				return false;
-		} else if (!zipCode.equals(other.zipCode))
-			return false;
 		return true;
 	}
-	
-	
-	
 
 }

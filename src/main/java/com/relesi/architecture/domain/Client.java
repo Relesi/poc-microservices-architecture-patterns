@@ -1,5 +1,6 @@
 package com.relesi.architecture.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -7,20 +8,23 @@ import java.util.Set;
 
 import com.relesi.architecture.domain.enums.ClientType;
 
-public class Client {
+public class Client implements Serializable {
 	
+	
+	private static final long serialVersionUID = 1L;
+
 	private Integer id;
 	private String name;
 	private String email;
 	private Double itinOrEin;
-	private ClientType type;
-	
+	private Integer type;
+
 	private List<Address> addresses = new ArrayList<>();
-	
+
 	private Set<String> phones = new HashSet<>();
-	
+
 	public Client() {
-		
+
 	}
 
 	public Client(Integer id, String name, String email, Double itinOrEin, ClientType type) {
@@ -29,7 +33,7 @@ public class Client {
 		this.name = name;
 		this.email = email;
 		this.itinOrEin = itinOrEin;
-		this.type = type;
+		this.type = type.getCod();
 	}
 
 	public Integer getId() {
@@ -65,11 +69,11 @@ public class Client {
 	}
 
 	public ClientType getType() {
-		return type;
+		return ClientType.toEnum(type);
 	}
 
 	public void setType(ClientType type) {
-		this.type = type;
+		this.type = type.getCod();
 	}
 
 	public List<Address> getAddresses() {
@@ -92,13 +96,7 @@ public class Client {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((addresses == null) ? 0 : addresses.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((itinOrEin == null) ? 0 : itinOrEin.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((phones == null) ? 0 : phones.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -111,43 +109,12 @@ public class Client {
 		if (getClass() != obj.getClass())
 			return false;
 		Client other = (Client) obj;
-		if (addresses == null) {
-			if (other.addresses != null)
-				return false;
-		} else if (!addresses.equals(other.addresses))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (itinOrEin == null) {
-			if (other.itinOrEin != null)
-				return false;
-		} else if (!itinOrEin.equals(other.itinOrEin))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (phones == null) {
-			if (other.phones != null)
-				return false;
-		} else if (!phones.equals(other.phones))
-			return false;
-		if (type != other.type)
-			return false;
 		return true;
 	}
-	
-	
-	
-	
 
 }
