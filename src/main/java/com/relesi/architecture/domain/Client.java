@@ -18,8 +18,7 @@ import com.relesi.architecture.domain.enums.ClientType;
 
 @Entity
 public class Client implements Serializable {
-	
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -30,11 +29,9 @@ public class Client implements Serializable {
 	private String itinOrEin;
 	private Integer type;
 
-	
 	@OneToMany(mappedBy = "client")
 	private List<Address> addresses = new ArrayList<>();
 
-	
 	@ElementCollection
 	@CollectionTable(name = "TELEPHONE")
 	private Set<String> telephones = new HashSet<>();

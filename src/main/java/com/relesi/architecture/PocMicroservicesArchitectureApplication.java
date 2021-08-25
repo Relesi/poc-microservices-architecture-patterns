@@ -35,14 +35,12 @@ public class PocMicroservicesArchitectureApplication implements CommandLineRunne
 
 	@Autowired
 	private StateRepository stateRepository;
-	
+
 	@Autowired
 	private ClientRepository clientRepository;
-	
+
 	@Autowired
 	private AddressRepository addressRepository;
-	
-	
 
 	public static void main(String[] args) {
 		SpringApplication.run(PocMicroservicesArchitectureApplication.class, args);
@@ -64,10 +62,9 @@ public class PocMicroservicesArchitectureApplication implements CommandLineRunne
 		p1.getCategories().addAll(Arrays.asList(cat1));
 		p2.getCategories().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategories().addAll(Arrays.asList(cat1));
-		
+
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3));
-		
 
 		State sta1 = new State(null, "California");
 		State sta2 = new State(null, "Texa");
@@ -76,23 +73,20 @@ public class PocMicroservicesArchitectureApplication implements CommandLineRunne
 		City c2 = new City(null, "Dallas", sta2);
 		City c3 = new City(null, "Houston", sta2);
 
-		
 		sta1.getCities().addAll(Arrays.asList(c1));
 		sta2.getCities().addAll(Arrays.asList(c2, c3));
-		
+
 		stateRepository.saveAll(Arrays.asList(sta1, sta2));
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
-		
-		
-		
-		Client cli1 = new Client(null, "Renato Lessa", "renato@gmail.com", "29484284086", ClientType.NATURALPERSON );
+
+		Client cli1 = new Client(null, "Renato Lessa", "renato@gmail.com", "29484284086", ClientType.NATURALPERSON);
 		cli1.getTelephones().addAll(Arrays.asList("23450987", "98761234"));
-		
+
 		Address a1 = new Address(null, "Street Dumas", "300", "Apt 201", "Englewood", "01220839", cli1, c1);
 		Address a2 = new Address(null, "Street Broad Ave", "209", "Lounge 13", "New Jersey", "05880460", cli1, c2);
-		
+
 		cli1.getAddresses().addAll(Arrays.asList(a1, a2));
-		
+
 		clientRepository.saveAll(Arrays.asList(cli1));
 		addressRepository.saveAll(Arrays.asList(a1, a2));
 

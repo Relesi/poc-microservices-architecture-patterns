@@ -11,8 +11,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Address implements Serializable {
-	
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -24,14 +23,12 @@ public class Address implements Serializable {
 	private String district;
 	private String zipCode;
 
-	
 	@ManyToOne
-	@JoinColumn(name="client_id")
+	@JoinColumn(name = "client_id")
 	private Client client;
 
-	
 	@ManyToOne
-	@JoinColumn(name="city_id")
+	@JoinColumn(name = "city_id")
 	private City city;
 
 	public Address() {
