@@ -17,15 +17,12 @@ public class CategoriaService {
 
 	public Category search(Integer id) {
 		Optional<Category> obj = categoryRepository.findById(id);
+
+//		return obj.orElseThrow(() -> new ObjectNotFoundException(
+//				"Object not found!  Id: " + id + ", Tipo: " + Category.class.getName()));
 		
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Object not found!  Id: " + id + ", Tipo: " + Category.class.getName()));
+		return this.search(id);
 
 	}
-	
-
-
-
-
 
 }
