@@ -1,13 +1,16 @@
 package com.relesi.architecture.domain.enums;
 
-public enum ClientType {
+public enum PaymentState {
+	
+	PENDING(1, "Pending" ),
+	SETTLED(2, "settled"),
+	CANCELED(3, "Canceled");
 
-	NATURALPERSON(1, "Natural Person"), LEGALPERSON(2, "Legal Person");
-
+	
 	private int cod;
 	private String description;
 
-	private ClientType(int cod, String description) {
+	private PaymentState(int cod, String description) {
 		this.cod = cod;
 		this.description = description;
 
@@ -20,14 +23,15 @@ public enum ClientType {
 	public String getDescription() {
 		return description;
 	}
-
-	public static ClientType toEnum(Integer cod) {
+	
+	
+	public static PaymentState toEnum(Integer cod) {
 
 		if (cod == null) {
 			return null;
 		}
 
-		for (ClientType x : ClientType.values()) {
+		for (PaymentState x : PaymentState.values()) {
 
 			if (cod.equals(x.getCod())) {
 				return x;
@@ -36,5 +40,6 @@ public enum ClientType {
 		}
 		throw new IllegalArgumentException("Invalid id:  " + cod);
 	}
+
 
 }
