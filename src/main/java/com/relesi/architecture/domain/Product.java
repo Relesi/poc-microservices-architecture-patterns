@@ -2,7 +2,9 @@ package com.relesi.architecture.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,18 +22,17 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private Double price;
 
 	@JsonBackReference
 	@ManyToMany
-	@JoinTable(name = "PRODUCT_CATEGORY", 
-	joinColumns = @JoinColumn(name  = "product_id"), 
-	inverseJoinColumns = @JoinColumn(name = "category_id")
-	)
+	@JoinTable(name = "PRODUCT_CATEGORY", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories = new ArrayList<>();
+
+	private Set<PurchaseItem> items = new HashSet<>();
 
 	public Product() {
 
@@ -42,6 +43,14 @@ public class Product implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.price = price;
+	}
+
+	public List<PurchaseOrder> getPurchaseOrders() {
+		List<PurchaseOrder> list = new ArrayList<>();
+		for (PurchaseItem ava : items) {
+			list.add(ava.getPurchaseOrder());
+		}
+		return list;
 	}
 
 	public Integer getId() {
@@ -74,6 +83,14 @@ public class Product implements Serializable {
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
+	}
+
+	public Set<PurchaseItem> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<PurchaseItem> items) {
+		this.items = items;
 	}
 
 	@Override

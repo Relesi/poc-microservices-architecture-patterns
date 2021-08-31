@@ -2,6 +2,8 @@ package com.relesi.architecture.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,7 +26,7 @@ public class PurchaseOrder implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
 	private Payment payment;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
@@ -32,6 +34,8 @@ public class PurchaseOrder implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "delivery_addresses_id")
 	private Address deliveryAddresses;
+
+	private Set<PurchaseItem> items = new HashSet<>();
 
 	public PurchaseOrder() {
 
@@ -83,6 +87,14 @@ public class PurchaseOrder implements Serializable {
 
 	public void setDeliveryAddresses(Address deliveryAddresses) {
 		this.deliveryAddresses = deliveryAddresses;
+	}
+
+	public Set<PurchaseItem> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<PurchaseItem> items) {
+		this.items = items;
 	}
 
 	@Override
