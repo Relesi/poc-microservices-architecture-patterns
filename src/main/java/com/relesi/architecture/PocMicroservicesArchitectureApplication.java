@@ -1,5 +1,6 @@
 package com.relesi.architecture;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,14 @@ import com.relesi.architecture.domain.Address;
 import com.relesi.architecture.domain.Category;
 import com.relesi.architecture.domain.City;
 import com.relesi.architecture.domain.Client;
+import com.relesi.architecture.domain.Order;
+import com.relesi.architecture.domain.Payment;
+import com.relesi.architecture.domain.PaymentCard;
+import com.relesi.architecture.domain.PaymentSlip;
 import com.relesi.architecture.domain.Product;
 import com.relesi.architecture.domain.State;
 import com.relesi.architecture.domain.enums.ClientType;
+import com.relesi.architecture.domain.enums.PaymentState;
 import com.relesi.architecture.repositories.AddressRepository;
 import com.relesi.architecture.repositories.CategoryRepository;
 import com.relesi.architecture.repositories.CityRepository;
@@ -89,6 +95,25 @@ public class PocMicroservicesArchitectureApplication implements CommandLineRunne
 
 		clientRepository.saveAll(Arrays.asList(cli1));
 		addressRepository.saveAll(Arrays.asList(a1, a2));
+		
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		Order ord1 = new Order(null, sdf.parse("13/08/2021 10:42"), cli1, a1);
+		Order ord2 = new Order(null, sdf.parse("14/08/2021 19:15"), cli1, a2);
+		
+		Payment pay1 = new PaymentCard(null, PaymentState.SETTLED, ord1, 6);
+		ord1.setPayment(pay1);
+		
+		
+		Payment pay2 = new PaymentSlip(null, PaymentState.PENDING, ord2, sdf.parse("01/09/2021 00:00"), null);
+		ord1.setPayment(pay2);
+		
+		cli1.getOrders().addAll(Arrays.asList(ord1, ord2));
+		
+		
+		
 
 	}
 

@@ -1,7 +1,10 @@
 package com.relesi.architecture.domain;
 
+import javax.persistence.Entity;
+
 import com.relesi.architecture.domain.enums.PaymentState;
 
+@Entity
 public class PaymentCard extends Payment {
 
 	private static final long serialVersionUID = 1L;

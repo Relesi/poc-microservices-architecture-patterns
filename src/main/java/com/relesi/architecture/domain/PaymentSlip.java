@@ -2,8 +2,11 @@ package com.relesi.architecture.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
 import com.relesi.architecture.domain.enums.PaymentState;
 
+@Entity
 public class PaymentSlip extends Payment {
 	
 	private static final long serialVersionUID = 1L; 

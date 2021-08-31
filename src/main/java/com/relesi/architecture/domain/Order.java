@@ -8,13 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -22,18 +24,23 @@ public class Order implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Payment payment;
+	
+	@ManyToOne
+	@JoinColumn(name = "client_id")
 	private Client client;
+
+	@ManyToOne
+	@JoinColumn(name = "delivery_addresses_id")
 	private Address deliveryAddresses;
 
 	public Order() {
 
 	}
 
-	public Order(Integer id, Date instant, Payment payment, Client client, Address deliveryAddresses) {
+	public Order(Integer id, Date instant, Client client, Address deliveryAddresses) {
 		super();
 		this.id = id;
 		this.instant = instant;
-		this.payment = payment;
 		this.client = client;
 		this.deliveryAddresses = deliveryAddresses;
 	}
