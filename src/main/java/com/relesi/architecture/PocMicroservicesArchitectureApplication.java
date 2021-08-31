@@ -17,6 +17,7 @@ import com.relesi.architecture.domain.Payment;
 import com.relesi.architecture.domain.PaymentCard;
 import com.relesi.architecture.domain.PaymentSlip;
 import com.relesi.architecture.domain.Product;
+import com.relesi.architecture.domain.PurchaseItem;
 import com.relesi.architecture.domain.State;
 import com.relesi.architecture.domain.enums.ClientType;
 import com.relesi.architecture.domain.enums.PaymentState;
@@ -27,6 +28,7 @@ import com.relesi.architecture.repositories.ClientRepository;
 import com.relesi.architecture.repositories.PurchaseOrderRepository;
 import com.relesi.architecture.repositories.PaymentRepository;
 import com.relesi.architecture.repositories.ProductRepository;
+import com.relesi.architecture.repositories.PurchaseItemRepository;
 import com.relesi.architecture.repositories.StateRepository;
 
 @SpringBootApplication
@@ -55,6 +57,9 @@ public class PocMicroservicesArchitectureApplication implements CommandLineRunne
 
 	@Autowired
 	private PaymentRepository paymentRepository;
+	
+	@Autowired
+	private PurchaseItemRepository purchaseItemRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PocMicroservicesArchitectureApplication.class, args);
@@ -123,6 +128,32 @@ public class PocMicroservicesArchitectureApplication implements CommandLineRunne
 		
 		purchaseOrderRepository.saveAll(Arrays.asList(purchaseOrder1, purchaseOrder2));
 		paymentRepository.saveAll(Arrays.asList(pay1, pay2));
+		
+		
+		PurchaseItem purchIte1 = new PurchaseItem(purchaseOrder1, p1, 0.00, 1, 2000.00);
+		PurchaseItem purchIte2 = new PurchaseItem(purchaseOrder1, p3, 0.00, 2, 80.00);
+		PurchaseItem purchIte3 = new PurchaseItem(purchaseOrder2, p2, 100.00, 1, 800.00);
+		
+		purchaseOrder1.getItems().addAll(Arrays.asList(purchIte1, purchIte2));
+		purchaseOrder1.getItems().addAll(Arrays.asList(purchIte3));
+		
+		p1.getItems().addAll(Arrays.asList(purchIte1));
+		p1.getItems().addAll(Arrays.asList(purchIte3));
+		p1.getItems().addAll(Arrays.asList(purchIte2));
+		
+		
+		purchaseItemRepository.saveAll(Arrays.asList(purchIte1, purchIte2, purchIte3));
+		
+		
+		
+		
+
+		
+
+				
+				
+				
+	
 		
 		
 		
