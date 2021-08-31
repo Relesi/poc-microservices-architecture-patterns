@@ -12,7 +12,7 @@ import com.relesi.architecture.domain.Address;
 import com.relesi.architecture.domain.Category;
 import com.relesi.architecture.domain.City;
 import com.relesi.architecture.domain.Client;
-import com.relesi.architecture.domain.Order;
+import com.relesi.architecture.domain.PurchaseOrder;
 import com.relesi.architecture.domain.Payment;
 import com.relesi.architecture.domain.PaymentCard;
 import com.relesi.architecture.domain.PaymentSlip;
@@ -24,6 +24,8 @@ import com.relesi.architecture.repositories.AddressRepository;
 import com.relesi.architecture.repositories.CategoryRepository;
 import com.relesi.architecture.repositories.CityRepository;
 import com.relesi.architecture.repositories.ClientRepository;
+import com.relesi.architecture.repositories.PurchaseOrderRepository;
+import com.relesi.architecture.repositories.PaymentRepository;
 import com.relesi.architecture.repositories.ProductRepository;
 import com.relesi.architecture.repositories.StateRepository;
 
@@ -47,7 +49,13 @@ public class PocMicroservicesArchitectureApplication implements CommandLineRunne
 
 	@Autowired
 	private AddressRepository addressRepository;
+	
+	@Autowired
+	private PurchaseOrderRepository purchaseOrderRepository;
 
+	@Autowired
+	private PaymentRepository paymentRepository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(PocMicroservicesArchitectureApplication.class, args);
 	}
@@ -98,19 +106,23 @@ public class PocMicroservicesArchitectureApplication implements CommandLineRunne
 		
 		
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		
-		Order ord1 = new Order(null, sdf.parse("13/08/2021 10:42"), cli1, a1);
-		Order ord2 = new Order(null, sdf.parse("14/08/2021 19:15"), cli1, a2);
-		
-		Payment pay1 = new PaymentCard(null, PaymentState.SETTLED, ord1, 6);
-		ord1.setPayment(pay1);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		
 		
-		Payment pay2 = new PaymentSlip(null, PaymentState.PENDING, ord2, sdf.parse("01/09/2021 00:00"), null);
-		ord1.setPayment(pay2);
+		PurchaseOrder purchaseOrder1 = new PurchaseOrder(null, sdf.parse("13/08/2021 00:00"), cli1, a1);
+		PurchaseOrder purchaseOrder2 = new PurchaseOrder(null, sdf.parse("14/08/2021 00:00"), cli1, a2);
 		
-		cli1.getOrders().addAll(Arrays.asList(ord1, ord2));
+		Payment pay1 = new PaymentCard(null, PaymentState.SETTLED, purchaseOrder1, 6);
+		purchaseOrder1.setPayment(pay1);
+		
+		
+		Payment pay2 = new PaymentSlip(null, PaymentState.PENDING, purchaseOrder2, sdf.parse("01/09/2021 00:00"), null);
+		purchaseOrder2.setPayment(pay2);
+		
+		cli1.getPurchaseOrder().addAll(Arrays.asList(purchaseOrder1, purchaseOrder2));
+		
+		purchaseOrderRepository.saveAll(Arrays.asList(purchaseOrder1, purchaseOrder2));
+		paymentRepository.saveAll(Arrays.asList(pay1, pay2));
 		
 		
 		

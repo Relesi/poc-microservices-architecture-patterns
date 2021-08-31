@@ -16,26 +16,26 @@ import com.relesi.architecture.domain.enums.PaymentState;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Payment implements Serializable {
 
-	private static final long serialVersionUID = 1L; 
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private Integer id;
-	private PaymentState state;
+	private Integer state;
 
 	@OneToOne
-	@JoinColumn(name = "order_id")
+	@JoinColumn(name = "purchaseOrder_id")
 	@MapsId
-	private Order order;
+	private PurchaseOrder purchaseOrder;
 
 	public Payment() {
 
 	}
 
-	public Payment(Integer id, PaymentState state, Order order) {
+	public Payment(Integer id, PaymentState state, PurchaseOrder purchaseOrder) {
 		super();
 		this.id = id;
-		this.state = state;
-		this.order = order;
+		this.state = state.getCod();
+		this.purchaseOrder = purchaseOrder;
 	}
 
 	public Integer getId() {
@@ -47,19 +47,11 @@ public abstract class Payment implements Serializable {
 	}
 
 	public PaymentState getState() {
-		return state;
+		return PaymentState.toEnum(state);
 	}
 
 	public void setState(PaymentState state) {
-		this.state = state;
-	}
-
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
+		this.state = state.getCod();
 	}
 
 	@Override

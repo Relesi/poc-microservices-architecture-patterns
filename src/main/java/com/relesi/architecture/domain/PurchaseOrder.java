@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Order implements Serializable {
+public class PurchaseOrder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class Order implements Serializable {
 	private Integer id;
 	private Date instant;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
 	private Payment payment;
 	
 	@ManyToOne
@@ -33,11 +33,11 @@ public class Order implements Serializable {
 	@JoinColumn(name = "delivery_addresses_id")
 	private Address deliveryAddresses;
 
-	public Order() {
+	public PurchaseOrder() {
 
 	}
 
-	public Order(Integer id, Date instant, Client client, Address deliveryAddresses) {
+	public PurchaseOrder(Integer id, Date instant, Client client, Address deliveryAddresses) {
 		super();
 		this.id = id;
 		this.instant = instant;
@@ -101,7 +101,7 @@ public class Order implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Order other = (Order) obj;
+		PurchaseOrder other = (PurchaseOrder) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
