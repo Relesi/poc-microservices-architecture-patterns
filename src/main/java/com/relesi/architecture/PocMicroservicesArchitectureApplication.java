@@ -114,28 +114,28 @@ public class PocMicroservicesArchitectureApplication implements CommandLineRunne
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		
 		
-		PurchaseOrder purchaseOrder1 = new PurchaseOrder(null, sdf.parse("13/08/2021 00:00"), cli1, a1);
-		PurchaseOrder purchaseOrder2 = new PurchaseOrder(null, sdf.parse("14/08/2021 00:00"), cli1, a2);
+		PurchaseOrder ord1 = new PurchaseOrder(null, sdf.parse("13/08/2021 00:00"), cli1, a1);
+		PurchaseOrder ord2 = new PurchaseOrder(null, sdf.parse("14/08/2021 00:00"), cli1, a2);
 		
-		Payment pay1 = new PaymentCard(null, PaymentState.SETTLED, purchaseOrder1, 6);
-		purchaseOrder1.setPayment(pay1);
+		Payment pay1 = new PaymentCard(null, PaymentState.SETTLED, ord1, 6);
+		ord1.setPayment(pay1);
 		
 		
-		Payment pay2 = new PaymentSlip(null, PaymentState.PENDING, purchaseOrder2, sdf.parse("01/09/2021 00:00"), null);
-		purchaseOrder2.setPayment(pay2);
+		Payment pay2 = new PaymentSlip(null, PaymentState.PENDING, ord2, sdf.parse("01/09/2021 00:00"), null);
+		ord2.setPayment(pay2);
 		
-		cli1.getPurchaseOrder().addAll(Arrays.asList(purchaseOrder1, purchaseOrder2));
+		cli1.getPurchaseOrder().addAll(Arrays.asList(ord1, ord2));
 		
-		purchaseOrderRepository.saveAll(Arrays.asList(purchaseOrder1, purchaseOrder2));
+		purchaseOrderRepository.saveAll(Arrays.asList(ord1, ord2));
 		paymentRepository.saveAll(Arrays.asList(pay1, pay2));
 		
 		
-		PurchaseItem purchIte1 = new PurchaseItem(purchaseOrder1, p1, 0.00, 1, 2000.00);
-		PurchaseItem purchIte2 = new PurchaseItem(purchaseOrder1, p3, 0.00, 2, 80.00);
-		PurchaseItem purchIte3 = new PurchaseItem(purchaseOrder2, p2, 100.00, 1, 800.00);
+		PurchaseItem purchIte1 = new PurchaseItem(ord1, p1, 0.00, 1, 2000.00);
+		PurchaseItem purchIte2 = new PurchaseItem(ord1, p3, 0.00, 2, 80.00);
+		PurchaseItem purchIte3 = new PurchaseItem(ord2, p2, 100.00, 1, 800.00);
 		
-		purchaseOrder1.getItems().addAll(Arrays.asList(purchIte1, purchIte2));
-		purchaseOrder1.getItems().addAll(Arrays.asList(purchIte3));
+		ord1.getItems().addAll(Arrays.asList(purchIte1, purchIte2));
+		ord1.getItems().addAll(Arrays.asList(purchIte3));
 		
 		p1.getItems().addAll(Arrays.asList(purchIte1));
 		p1.getItems().addAll(Arrays.asList(purchIte3));
