@@ -31,6 +31,7 @@ public class AddressRepositoryTest {
 
 		address.setCity(new City());
 		address.setClient(new Client());
+		this.addressRepository.save(address);
 
 	}
 	
