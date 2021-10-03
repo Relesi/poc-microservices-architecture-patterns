@@ -10,7 +10,7 @@ import com.relesi.architecture.repositories.CategoryRepository;
 import com.relesi.architecture.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class CategoriaService {
+public class CategoryService {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -22,10 +22,10 @@ public class CategoriaService {
 				"Object not found!  Id: " + id + ", Tipo: " + Category.class.getName()));
 
 	}
-	
 
-
-
-
+	public Category insert(Category obj) {
+		obj.setId(null);
+		return categoryRepository.save(obj);
+	}
 
 }
