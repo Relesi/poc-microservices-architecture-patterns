@@ -12,16 +12,15 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Category implements Serializable {
-	
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String name;
-	
+
 	@ManyToMany(mappedBy = "categories")
 	private List<Product> products = new ArrayList<>();
 
@@ -29,10 +28,10 @@ public class Category implements Serializable {
 
 	}
 
-	public Category(Integer id, String nome) {
+	public Category(Integer id, String name) {
 		super();
 		this.id = id;
-		this.name = nome;
+		this.name = name;
 	}
 
 	public Integer getId() {
@@ -43,14 +42,14 @@ public class Category implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
+	public String getName() {
 		return name;
 	}
 
-	public void setNome(String nome) {
-		this.name = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
+
 	public List<Product> getProducts() {
 		return products;
 	}
@@ -83,9 +82,5 @@ public class Category implements Serializable {
 			return false;
 		return true;
 	}
-
-	
-
-
 
 }

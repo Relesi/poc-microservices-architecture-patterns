@@ -25,10 +25,10 @@ public class PurchaseOrder implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date instant;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
 	private Payment payment;
 
