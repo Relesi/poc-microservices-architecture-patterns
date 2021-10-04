@@ -27,5 +27,4 @@ public class PaymentCard extends Payment {
 	public void setParcelNumber(Integer parcelNumber) {
 		this.parcelNumber = parcelNumber;
 	}
-
 }
