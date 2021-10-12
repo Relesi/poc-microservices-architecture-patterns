@@ -2,6 +2,7 @@ package com.relesi.architecture.services;
 
 import java.util.Optional;
 
+import com.relesi.architecture.services.exceptions.DataIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class CategoryService {
 		try {
 			categoryRepository.deleteById(id);
 		}catch (DataIntegrityViolationException e) {
-
+			throw new DataIntegrityException("Cannot to remove a category that has a product!");
 		}
 
     }
