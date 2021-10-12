@@ -34,4 +34,9 @@ public class CategoryService {
 		
 	}
 
+    public void delete(Integer id) {
+		find(id);
+		categoryRepository.deleteById(id);
+
+    }
 }
