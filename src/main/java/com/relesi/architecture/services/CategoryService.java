@@ -3,6 +3,7 @@ package com.relesi.architecture.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.relesi.architecture.domain.Category;
@@ -36,7 +37,11 @@ public class CategoryService {
 
     public void delete(Integer id) {
 		find(id);
-		categoryRepository.deleteById(id);
+		try {
+			categoryRepository.deleteById(id);
+		}catch (DataIntegrityViolationException e) {
+
+		}
 
     }
 }
