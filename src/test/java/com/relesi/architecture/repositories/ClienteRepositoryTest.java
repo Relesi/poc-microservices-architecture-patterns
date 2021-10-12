@@ -48,7 +48,7 @@ public class ClienteRepositoryTest {
 
 	@Test
 	public void testSearch() {
-		final Optional<Client> client = Optional.ofNullable(this.clientService.search(ID));
+		final Optional<Client> client = Optional.ofNullable(this.clientService.find(ID));
 		assertTrue(client.isPresent());
 	}
 

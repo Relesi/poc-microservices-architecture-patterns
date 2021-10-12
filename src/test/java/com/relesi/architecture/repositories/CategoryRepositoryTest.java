@@ -39,7 +39,7 @@ public class CategoryRepositoryTest {
 
 	@Test
 	public void testSearch() {
-		final Optional<Category> category = Optional.ofNullable(this.categoryService.search(ID));
+		final Optional<Category> category = Optional.ofNullable(this.categoryService.find(ID));
 		assertTrue(category.isPresent());
 	}
 
