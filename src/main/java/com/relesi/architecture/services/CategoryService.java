@@ -1,5 +1,6 @@
 package com.relesi.architecture.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.relesi.architecture.services.exceptions.DataIntegrityException;
@@ -22,7 +23,6 @@ public class CategoryService {
 		
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Object not found!  Id: " + id + ", Tipo: " + Category.class.getName()));
-
 	}
 
 	public Category insert(Category obj) {
@@ -33,7 +33,6 @@ public class CategoryService {
 	public Category update(Category obj) {
 		find(obj.getId());
 		return categoryRepository.save(obj);
-		
 	}
 
     public void delete(Integer id) {
@@ -43,6 +42,9 @@ public class CategoryService {
 		}catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Cannot to remove a category that has a product!");
 		}
-
     }
+
+	public List<Category> findAll() {
+		return categoryRepository.findAll();
+	}
 }
