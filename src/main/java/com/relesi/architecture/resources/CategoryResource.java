@@ -21,49 +21,42 @@ import com.relesi.architecture.services.CategoryService;
 @RequestMapping(value = "/category")
 public class CategoryResource {
 
-	@Autowired
-	private CategoryService categoryService;
+    @Autowired
+    private CategoryService categoryService;
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Category> find(@PathVariable Integer id) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Category> find(@PathVariable Integer id) {
+        Category obj = categoryService.find(id);
+        return ResponseEntity.ok().body(obj);
+    }
 
-		Category obj = categoryService.find(id);
-		return ResponseEntity.ok().body(obj);
-	}
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> insert(@RequestBody Category obj) {
+        obj = categoryService.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Category obj) {
-		obj = categoryService.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
-	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Category obj, @PathVariable Integer id){
-		obj.setId(id);
-		obj = categoryService.update(obj);
-		return ResponseEntity.noContent().build();
-	}
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@RequestBody Category obj, @PathVariable Integer id) {
+        obj.setId(id);
+        obj = categoryService.update(obj);
+        return ResponseEntity.noContent().build();
+    }
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
-		categoryService.delete(id);
-		return ResponseEntity.noContent().build();
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        categoryService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<CategoryDTO>> findAll() {
+        List<Category> list = categoryService.findAll();
+        List<CategoryDTO> listDto = list.stream().map(obj -> new CategoryDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);
 
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<CategoryDTO>> findAll() {
-		List<Category> list = categoryService.findAll();
-		List<CategoryDTO> listDto = list.stream().map(obj -> new CategoryDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
+    }
 
-	}
-	
-	
-	
-	
-	
-	
 
 }

@@ -37,7 +37,6 @@ public class ClienteRepositoryTest {
 		client.setName("Renato");
 		client.setEmail("renato@renato.com.br");
 		client.setItinOrEin("299.009.009.09");
-		// client.setType(null);
 
 		client.setAddresses(new ArrayList<Address>());
 		client.setTelephones(null);
