@@ -42,7 +42,6 @@ public class ClienteRepositoryTest {
 		client.setTelephones(null);
 		client.setPurchaseOrder(new ArrayList<>());
 		this.clientRepository.save(client);
-
 	}
 
 	@Test
