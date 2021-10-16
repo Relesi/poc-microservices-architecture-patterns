@@ -37,18 +37,16 @@ public class ClienteRepositoryTest {
 		client.setName("Renato");
 		client.setEmail("renato@renato.com.br");
 		client.setItinOrEin("299.009.009.09");
-		// client.setType(null);
 
 		client.setAddresses(new ArrayList<Address>());
 		client.setTelephones(null);
 		client.setPurchaseOrder(new ArrayList<>());
 		this.clientRepository.save(client);
-
 	}
 
 	@Test
 	public void testSearch() {
-		final Optional<Client> client = Optional.ofNullable(this.clientService.search(ID));
+		final Optional<Client> client = Optional.ofNullable(this.clientService.find(ID));
 		assertTrue(client.isPresent());
 	}
 
